@@ -1,0 +1,110 @@
+<%if(pw==false){%>
+    <script type="text/javascript">alert("비밀번호가 일치하지 않습니다. 다시입력해주세요.");history.back();</script>
+<%}else if(id==false){%>
+    <script type="text/javascript">alert("아이디를 4~16자 이내로 입력하세요.");history.back();</script>
+<%}else if(pwo==false){%>
+    <script type="text/javascript">alert("비밀번호를 영문+숫자 조합으로 4~16자 이내로 입력하세요.");history.back();</script>
+<%}else if(ido==false){%>
+    <script type="text/javascript">alert("중복된 아이디입니다. 다른 아이디를 사용하세요.");history.back();</script>
+<%}else{%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GSM | TimeTable</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/timetable.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sign.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/sign.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <main>
+            <div class="supform">
+            <h2 class="mb-3 text-dark">SIGN UP</h2>
+            <form action="/signup" method="POST">
+                <div>
+                    <label class="inp mt-4">
+                        <input type="text" id="inp" placeholder="&nbsp;" name="sname" required autofocus>
+                        <span class="label">Name</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+                <div>
+                    <label class="inp mt-4">
+                        <input type="text" id="inp" placeholder="&nbsp;" name="sid" required>
+                        <span class="label">Id</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+                <div class="password-wrapper inp mt-4">
+                <input id="nc-password-field" type="password" class="input" placeholder="&nbsp;" name="spw" required>
+                <span class="label">Password</span>
+                <span class="border"></span>
+                <div class="icon-wrapper no-c-i-w">
+                    <span toggle="#nc-password-field" class="ion ion-eye field-icon toggle-password"></span>
+                </div>
+                <div class="strength-lines">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+                </div>
+                <div class="password-wrapper inp mt-4">
+                    <input id="c-password-field" type="password" class="input" placeholder="&nbsp;" name="spwo">
+                    <span class="label">Confirm Password</span>
+                    <span class="border"></span>
+                    <div class="icon-wrapper c-i-w">
+                        <span toggle="#c-password-field" class="ion ion-eye field-icon confirm-toggle-password"></span>
+                    </div>
+                </div>
+                <button type="submit" class="signin">
+                    <div class="circle">
+                        <span class="icon arrow"></span>
+                    </div>
+                    <p class="button-text">Sign Up</p>
+                </button>
+            </form>
+            </div>
+        </main>
+        <header>
+            <div class="logo">TimeTable</div>
+            <nav class="menu">
+                <a class="menu-item" href="view">
+                    <i class="menu-icon fa fa-calendar"></i>
+                    <span class="menu-text">timetable</span>
+                </a>
+                <a class="menu-item" href="login">
+                    <i class="menu-icon fa fa-sign-in-alt"></i>
+                    <span class="menu-text">signin</span>
+                </a>
+                <a class="menu-item menu-item-active" href="signup">
+                    <i class="menu-icon fa fa-user-plus"></i>
+                    <span class="menu-text">signup</span>
+                </a>
+                <a class="menu-item" href="edit">
+                    <i class="menu-icon fa fa-edit"></i>
+                    <span class="menu-text">edit timetable</span>
+                </a>
+                <a class="menu-item" href="manager">
+                    <i class="menu-icon fa fa-user-cog"></i>
+                    <span class="menu-text">admin edit</span>
+                </a>
+            </nav>
+            <div class="copyright">TimeTable</div>
+        </header>
+    </div>
+</body>
+</html>
+<%}%>

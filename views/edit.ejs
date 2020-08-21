@@ -1,0 +1,152 @@
+<%if(acess==false){%>
+    <script type="text/javascript">alert("선생님 또는 관리자만 접근가능합니다.");window.history.back();</script>
+<%}else{%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GSM | TimeTable</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/edit.css">
+    <link rel="stylesheet" href="css/timetable.css">
+    <link rel="stylesheet" href="css/header.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.js"></script> 
+</head>
+<body>
+    <div class="wrapper">
+        <main>
+            <div class="toolbar">
+                <div class="toggle">
+                    <div class="row">
+                        <form action="edit" method="post" name="edit">
+                            <select class="form-control select-sm" name="grade" onchange='this.form.submit()'>
+                                <%if(gradeNum.gr==2){%>
+                                    <option value="1">1학년</option>
+                                    <option value="2"selected>2학년</option>
+                                    <option value="3">3학년</option>
+                                <%}else if(gradeNum.gr==3){%>
+                                    <option value="1">1학년</option>
+                                    <option value="2">2학년</option>
+                                    <option value="3" selected>3학년</option>
+                                <%}else{%>
+                                    <option value="1" selected>1학년</option>
+                                    <option value="2">2학년</option>
+                                    <option value="3">3학년</option>
+                                <%}%>
+                            </select>
+                            <select class="form-control select-sm" name="class" onchange='this.form.submit()'>
+                                <%if(gradeNum.cl==2){%>
+                                    <option value="1">1반</option>
+                                    <option value="2"selected>2반</option>
+                                    <option value="3">3반</option>
+                                    <option value="4">4반</option>
+                                <%}else if(gradeNum.cl==3){%>
+                                    <option value="1">1반</option>
+                                    <option value="2">2반</option>
+                                    <option value="3" selected>3반</option>
+                                    <option value="4">4반</option>
+                                <%}else if(gradeNum.cl==4){%>
+                                    <option value="1">1반</option>
+                                    <option value="2">2반</option>
+                                    <option value="3">3반</option>
+                                    <option value="4" selected>4반</option>
+                                <%}else{%>
+                                    <option value="1" selected>1반</option>
+                                    <option value="2">2반</option>
+                                    <option value="3">3반</option>
+                                    <option value="4">4반</option>
+                                <%}%>
+                            </select>
+                        </form>
+                        <form action="edit2" method="post">
+                            <select name="week" class="form-control select-sm">
+                                <option value="1">월</option>
+                                <option value="2">화</option>
+                                <option value="3">수</option>
+                                <option value="4">목</option>
+                                <option value="5">금</option>
+                            </select>
+                            <select name="time" class="form-control select-sm">
+                                <option value="1">1교시</option>
+                                <option value="2">2교시</option>
+                                <option value="3">3교시</option>
+                                <option value="4">4교시</option>
+                                <option value="5">5교시</option>
+                                <option value="6">6교시</option>
+                                <option value="7">7교시</option>
+                                <option value="8">8교시</option>
+                                <option value="9">9교시</option>
+                                <option value="10">10교시</option>
+                                <option value="11">11교시</option>
+                            </select>
+                            <input class="form-control select-sm" style="border-bottom: 1px solid #A8B2B9;" type="text" name="edit">
+                            <input class="select-sm" type="submit" name="ok" value="교체">
+                        </form>
+                    </div>
+                </div>
+                <div class="current-month">2019 GSM TimeTable</div>
+            </div>
+            <form action="edit" method="GET">
+                <div class="timetable">
+                    <%if(table!==null){%>
+                        <div class="timetable-header">
+                            <div></div>
+                            <div>mon</div>
+                            <div>tue</div>
+                            <div>wed</div>
+                            <div>thu</div>
+                            <div>fri</div>
+                        </div>
+                        <div class="timetable-time">
+                            <%for(var i=0;i<11;i++){%>
+                                <div class="timetable-sub classtime"><%=i+1%>교시</div>
+                                <div class="timetable-sub"><%=table[i];%></div>
+                                <div class="timetable-sub"><%=table[i+11];%></div>
+                                <div class="timetable-sub"><%=table[i+22];%></div>
+                                <div class="timetable-sub"><%=table[i+33];%></div>
+                                <%if(i<6){%>
+                                    <div class="timetable-sub"><%=table[i+44];%></div>
+                                <%}else{%>
+                                    <div class="timetable-sub"></div>
+                                <%}%>
+                            <%}%>
+                        </div>
+                    <%}%>
+                </div>
+            </form>
+        </main>
+        <header>
+            <div class="logo">TimeTable</div>
+            <div class="avatar-name"><%=gradeNum.name%>&nbsp;&nbsp;</div>
+            <nav class="menu">
+                <a class="menu-item" href="view">
+                    <i class="menu-icon fa fa-calendar"></i>
+                    <span class="menu-text">timetable</span>
+                </a>
+                <a class="menu-item menu-item" href="logout">
+                    <i class="menu-icon fa fa-sign-out-alt"></i>
+                    <span class="menu-text">sign out</span>
+                </a>
+                <a class="menu-item menu-item-active" href="edit">
+                    <i class="menu-icon fa fa-edit"></i>
+                    <span class="menu-text">edit timetable</span>
+                </a>
+                <a class="menu-item" href="manager">
+                    <i class="menu-icon fa fa-user-cog"></i>
+                    <span class="menu-text">admin edit</span>
+                </a>
+            </nav>
+            <div class="copyright">TimeTable</div>
+        </header>
+    <div>
+</body>
+</html>
+<%}%>
